@@ -8,9 +8,9 @@ class BMICalculator extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Color(0xFF0A0E21),
-        hintColor: Colors.purple,
-        scaffoldBackgroundColor: Color.fromARGB(255, 48, 21, 95),
+        primaryColor: Color.fromARGB(255, 6, 18, 75),
+        cardColor: Color.fromARGB(255, 21, 30, 76),
+        scaffoldBackgroundColor: Color.fromARGB(255, 49, 3, 78),
         textTheme: TextTheme(
           bodySmall: TextStyle(
             color: Color.fromARGB(255, 227, 225, 225),
