@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+part "icon_content.dart";
 part "card.dart";
 
 const bottomContainerHeight = 80.0;
+const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
+
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -9,14 +15,20 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final TextStyle? smallColor = theme.textTheme.bodySmall;
-    final Color cardColor = theme.cardColor;
+    ThemeData theme = Theme.of(context);
+    Color footerColor = theme.primaryColorLight;
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR', style: smallColor),
+        title: Text(
+          'BMI CALCULATOR',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Column(
@@ -25,29 +37,57 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Card(colour: cardColor),
+                  child: Card(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    colour: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: IconContent(
+                      faIcon: FontAwesomeIcons.mars,
+                      label: 'MALE',
+                    ),
+                  ),
                 ),
-                Expanded(child: Card(colour: cardColor)),
+                Expanded(
+                  child: Card(
+                    onPress: () {
+                      setState(() { 
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    colour: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: IconContent(
+                      faIcon: FontAwesomeIcons.venus,
+                      label: 'FEMALE',
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
-            child: Card(colour: cardColor),
+            child: Card(colour: activeCardColor),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Card(colour: cardColor),
+                  child: Card(colour: activeCardColor),
                 ),
                 Expanded(
-                  child: Card(colour: cardColor),
+                  child: Card(colour: activeCardColor),
                 ),
               ],
             ),
           ),
           Container(
-            color: Color(0xFFEB1555),
+            color: footerColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: bottomContainerHeight,
